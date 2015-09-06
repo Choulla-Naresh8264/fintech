@@ -1,0 +1,13 @@
+﻿{
+    "Data": {
+        "DefaultConnection": {
+          "MongoConnectionString": "mongodb://localhost:27017",
+          "MongoDatabase": "fintech"
+        }
+    },
+  "Settings": {
+    "Bitcoin_DaemonUrl": "",
+    "Bitcoin_RpcUsername": "",
+    "Bitcoin_RpcPassword": ""
+  }
+}
