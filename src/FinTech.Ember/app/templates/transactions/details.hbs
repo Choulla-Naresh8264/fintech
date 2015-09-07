@@ -1,0 +1,13 @@
+{{#link-to "transactions"}}Back to Transaction list{{/link-to}}
+<form>
+
+<h2>Transaction details:</h2>
+<p><strong>Id: </strong>{{model.id}}</p>
+<p><strong>Amount: </strong>{{model.amount}}</p>
+<p><strong>Timestamp: </strong>{{model.timestamp}}</p>
+<p><strong>From: </strong>{{model.from}}</p>
+<p><strong>To: </strong>{{model.to}}</p>
+
+
+<button {{action 'saveTransaction'}} class="btn btn-default"><i class="fa fa-pencil"></i> Save changes</button>
+</form>

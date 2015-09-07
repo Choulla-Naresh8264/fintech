@@ -1,0 +1,8 @@
+<ul class="nav nav-sidebar" id="sidebar-nav">
+    {{#link-to "index" tagName="li"}}
+    	<a href="{{href}}"><i class="fa fa-dashboard fa-fw"></i> Welcome page</a>
+    {{/link-to}}
+    {{#link-to "transactions" tagName="li" current-when="transactions"}}
+    	<a href="{{href}}"><i class="fa fa-cubes fa-fw"></i> Transactions</a>
+    {{/link-to}}
+</ul>

@@ -1,0 +1,33 @@
+<h2 class="sub-header">Transactions</h2>
+<div class="search-bar form-inline">
+  {{input type='text' value=idFilter placeholder='Transaction Id' class="form-control"}}
+</div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Timestamp</th>
+            <th>Amount</th>
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#collection content=pagedContent tagName="tbody"}}
+              <td>{{#link-to 'transactions.details' this}}{{id}}{{/link-to}}</td>
+              <td>{{timestamp}}</td>
+              <td>{{amount}}</td>
+              <td>{{from}}</td>
+              <td>{{to}}</td>
+              <td>
+                  {{#link-to 'transactions.details' this class="btn btn-xs btn-default"}}Details{{/link-to}}
+              </td>
+          {{/collection}}
+        </tbody>
+      </table>
+    </div>
+    {{page-numbers content=pagedContent}}
+    <br/>
+    <button {{action 'newTransaction'}} class="btn btn-default"><i class="fa fa-pencil"></i> New Transaction</button>
+    <button {{action 'exportTransactions'}} class="btn btn-default"><i class="fa fa-cloud-download"></i> Export transactions</button>
