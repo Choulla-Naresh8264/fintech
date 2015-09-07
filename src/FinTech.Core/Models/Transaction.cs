@@ -13,7 +13,7 @@ namespace FinTech.Core.Models
         [BsonId]
         public string Id { get; set; }
         public string AccountId { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public DateTime Timestamp { get; set; }
         public double Amount { get; set; }
         public CryptoCurrencyType CurrencyType { get; set; } = CryptoCurrencyType.BitCoin;
         public string BlockChain { get; set; }

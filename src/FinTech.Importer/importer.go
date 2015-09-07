@@ -52,8 +52,8 @@ func main() {
 
 		t.Amount, err = strconv.ParseFloat(r.Amount(), 64)
 
-		t.From = r.From()
-		t.To = r.To()
+		t.FromAddress = r.From()
+		t.ToAddress = r.To()
 
 		log.Println("Importing", t.Id)
 		err = transactions.Insert(&t)

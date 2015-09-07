@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using FinTech.Core.Models;
 using FinTech.Core.Interfaces;
 using MongoDB.Bson;
+using FinTech.Web.Helpers;
 
 namespace FinTech.Web.Controllers
 {
@@ -19,15 +20,17 @@ namespace FinTech.Web.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Transaction> Get()
+        public IActionResult Get()
         {
-            return TransactionService.GetTransactions();
+            var transactions = TransactionService.GetTransactions();
+            return new JsonResult(new { transactions }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
         }
         
         [HttpGet("{id}")]
-        public Transaction Get(string id)
+        public IActionResult Get(string id)
         {
-            return TransactionService.GetTransactionById(id);
+            var transaction = TransactionService.GetTransactionById(id);
+            return new JsonResult(new { transaction }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
         }
         
         [HttpPost]

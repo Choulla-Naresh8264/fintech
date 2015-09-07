@@ -199,3 +199,5 @@ FakesAssemblies/
 *.exe
 
 /src/labix.org/v2/mgo
+src/FinTech.Web/wwwroot/app
+pkg

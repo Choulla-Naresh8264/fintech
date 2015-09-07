@@ -11,6 +11,9 @@ using Microsoft.Dnx.Runtime;
 using System.IO;
 using Microsoft.Framework.Configuration;
 using FinTech.Core.Services;
+using Microsoft.AspNet.Mvc;
+using FinTech.Web.Helpers;
+using Microsoft.Net.Http.Headers;
 
 namespace FinTech.Web
 {
@@ -26,7 +29,16 @@ namespace FinTech.Web
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.OutputFormatters.Clear();
+                options.OutputFormatters.Add(JsonHelper.GetConfiguredOutputFormatter());
+
+                options.InputFormatters.Clear();
+                options.InputFormatters.Add(JsonHelper.GetConfiguredInputFormatter());                
+            });
+
+            services.AddWebEncoders();
             services.AddScoped<ITransactionService,TransactionService>();
             services.AddScoped<BtcService>();
             services.AddInstance(Configuration);
