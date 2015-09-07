@@ -11,8 +11,9 @@ using MongoDB.Bson;
 
 namespace FinTech.Core.Services
 {
-    public class TransactionService : ITransactionService
+    public class TransactionService: ITransactionService
     {
+        public const string TRANSACTION_COLLECTION_NAME = "transactions";
         public IConfiguration Configuration { get; set; }
 
         public TransactionService(IConfiguration configuration)
@@ -20,44 +21,80 @@ namespace FinTech.Core.Services
             Configuration = configuration;
         }
 
-        public Transaction AddTransaction(Transaction transaction)
+        private IMongoDatabase _db;
+        private IMongoCollection<Transaction> TransactionCollection
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (_db == null)
+                {
+                    var connectionString = Configuration.GetSection("Data:DefaultConnection:MongoConnectionString");
+                    var client = new MongoClient(connectionString?.Value);
+
+                    var database = Configuration.GetSection("Data:DefaultConnection:MongoDatabase");
+                    _db = client.GetDatabase(database?.Value);
+                }
+                return _db.GetCollection<Transaction>(TRANSACTION_COLLECTION_NAME);
+            }
         }
 
-        public void CreateTransaction(Transaction transaction)
+
+        public Transaction AddTransaction(Transaction transaction)
         {
-            throw new NotImplementedException();
+            TransactionCollection.InsertOneAsync(transaction);
+            return transaction;
         }
+                
 
         public void DeleteTransaction(string id)
         {
-            throw new NotImplementedException();
+            TransactionCollection.DeleteOneAsync(x => x.Id == id);
         }
 
         public FileStream ExportTransactions()
         {
-            throw new NotImplementedException();
-        }
+            var transactions = GetTransactions();
 
-        public Transaction GetTransactionById(string id)
-        {
             throw new NotImplementedException();
         }
 
         public IList<Transaction> GetTransactions()
         {
-            throw new NotImplementedException();
+            var filter = new BsonDocument();
+            var transactions = TransactionCollection.Find(filter).ToListAsync().Result;
+            return transactions;
         }
 
         public double TotalAmount(string accountId, CryptoCurrencyType currencyType = CryptoCurrencyType.BitCoin)
         {
-            throw new NotImplementedException();
+            var balance = TransactionCollection.Aggregate()
+                .Match(x => x.AccountId == accountId && currencyType == x.CurrencyType)
+                .Group(x => x.AccountId, y => new { Account = y.Key, Balance = y.Sum(z => z.Amount) })
+                .FirstOrDefaultAsync().Result;
+
+            if (balance == null) return 0;
+            return balance.Balance;
         }
 
         public void UpdateTransaction(string id, Transaction transaction)
         {
+            var existingTransaction = GetTransactionById(id);
+            if(existingTransaction== null)
+            {
+                throw new ArgumentException("Transaction does not exist.");
+            }
             throw new NotImplementedException();
+        }
+
+        public Transaction GetTransactionById(string id)
+        {
+            var transaction = TransactionCollection.Find(x => x.Id == id).FirstOrDefaultAsync().Result;
+            return transaction;
+        }
+
+        public void CreateTransaction(Transaction transaction)
+        {
+            TransactionCollection.InsertOneAsync(transaction);
         }
     }
 }
