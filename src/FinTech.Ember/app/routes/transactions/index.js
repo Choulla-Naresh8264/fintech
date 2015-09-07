@@ -17,7 +17,7 @@ export default Ember.Route.extend({
       this.transitionTo('transactions');
     },
     exportTransactions: function(){
-
+        
     },
   }
 });

@@ -8,6 +8,8 @@ using System.IO;
 using MongoDB.Driver;
 using Microsoft.Framework.Configuration;
 using MongoDB.Bson;
+using QifApi;
+using QifApi.Transactions;
 
 namespace FinTech.Core.Services
 {
@@ -51,11 +53,24 @@ namespace FinTech.Core.Services
             TransactionCollection.DeleteOneAsync(x => x.Id == id);
         }
 
-        public FileStream ExportTransactions()
+        public void ExportTransactions(string filename)
         {
             var transactions = GetTransactions();
+            var wrapper = new QifDomComWrapper();
+            var qd = new QifDom();
 
-            throw new NotImplementedException();
+            foreach (var t in transactions)
+            {
+                // todo: proper conversion
+                var transaction = new BasicTransaction();
+                transaction.Amount = (decimal)t.Amount;
+                transaction.Date = t.Timestamp;
+                transaction.Payee = t.FromAddress;
+                transaction.Memo = t.ToAddress;
+                qd.CashTransactions.Add(transaction);
+            }
+
+            qd.Export(filename);
         }
 
         public IList<Transaction> GetTransactions()

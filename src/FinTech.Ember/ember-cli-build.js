@@ -5,6 +5,8 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     storeConfigInMeta: false
   });
+  
+  app.import('bower_components/moment/moment.js');
 
   app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
   app.import('bower_components/bootstrap/dist/css/bootstrap.css');

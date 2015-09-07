@@ -15,8 +15,7 @@ namespace FinTech.Core.Interfaces
         void DeleteTransaction(string id);
         void UpdateTransaction(string id, Transaction transaction);
         Transaction AddTransaction(Transaction transaction);
-
-        FileStream ExportTransactions();
+        void ExportTransactions(string filename);
 
         double TotalAmount(string accountId, CryptoCurrencyType currencyType = CryptoCurrencyType.BitCoin);
         void CreateTransaction(Transaction transaction);

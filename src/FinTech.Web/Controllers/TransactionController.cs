@@ -7,6 +7,8 @@ using FinTech.Core.Models;
 using FinTech.Core.Interfaces;
 using MongoDB.Bson;
 using FinTech.Web.Helpers;
+using System.Text;
+using System.IO;
 
 namespace FinTech.Web.Controllers
 {
@@ -51,11 +53,15 @@ namespace FinTech.Web.Controllers
             TransactionService.DeleteTransaction(id);
         }
 
-        [HttpPost("export")]
-        public void Export()
+        [HttpGet("export")]
+        public IActionResult Export()
         {
-            var exported = TransactionService.ExportTransactions();
+            var tempFilename = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".qif");
+            TransactionService.ExportTransactions(tempFilename);
+            var exportBytes = System.IO.File.ReadAllBytes(tempFilename);
+            var result = new FileContentResult(exportBytes, "application/qif");
+            result.FileDownloadName = string.Format("Transactions-{0}.qif", DateTime.Now.ToShortDateString());
+            return result;
         }
-
     }
 }

@@ -2,12 +2,11 @@
 <form>
 
 <h2>Transaction details:</h2>
-<p><strong>Id: </strong>{{model.id}}</p>
+<p><strong>Id: </strong><a href="https://blockchain.info/tx/{{model.id}}" target="_blank">{{model.id}}</a></p>
 <p><strong>Amount: </strong>{{model.amount}}</p>
 <p><strong>Timestamp: </strong>{{model.timestamp}}</p>
-<p><strong>From: </strong>{{model.from}}</p>
-<p><strong>To: </strong>{{model.to}}</p>
+<p><strong>From: </strong>{{model.fromAddress}}</p>
+<p><strong>To: </strong>{{model.toAddress}}</p>
 
-
-<button {{action 'saveTransaction'}} class="btn btn-default"><i class="fa fa-pencil"></i> Save changes</button>
+<!-- <button {{action 'saveTransaction'}} class="btn btn-default"><i class="fa fa-pencil"></i> Save changes</button> -->
 </form>
