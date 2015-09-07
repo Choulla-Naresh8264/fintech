@@ -13,15 +13,20 @@
             <th>Actions</th>
           </tr>
         </thead>
-        {{#collection content=pagedContent tagName="tbody"}}
-          <td>{{fromAddress}}</td>
-          <td>{{toAddress}}</td>
-          <td>{{f-date timestamp}}</td>
-          <td>{{amount}}</td>
-          <td>
-              {{#link-to 'transactions.details' this class="btn btn-xs btn-default"}}Details{{/link-to}}
-          </td>
-        {{/collection}}
+        <tbody>
+          {{#each pagedContent as |t|}}
+          <tr>
+            <td>{{t.fromAddress}}</td>
+            <td>{{t.toAddress}}</td>
+            <td>{{f-date t.timestamp}}</td>
+            <td>{{t.amount}}</td>
+            <td>
+                {{#link-to 'transactions.details' t class="btn btn-xs btn-default"}}Details{{/link-to}}
+                <button {{action 'deleteTransaction' t  target="controller"}} class="btn btn-xs btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
       </table>
     </div>
     {{page-numbers content=pagedContent}}

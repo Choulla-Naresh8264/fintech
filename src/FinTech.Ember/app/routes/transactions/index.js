@@ -15,9 +15,6 @@ export default Ember.Route.extend({
     deleteTransaction: function(transaction){
       transaction.destroyRecord();
       this.transitionTo('transactions');
-    },
-    exportTransactions: function(){
-        
-    },
+    }
   }
 });

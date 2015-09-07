@@ -42,15 +42,17 @@ namespace FinTech.Web.Controllers
         }
         
         [HttpPut("{id}")]
-        public void Update(string id, [FromBody]Transaction transaction)
+        public IActionResult Update(string id, [FromBody]Transaction transaction)
         {
             TransactionService.UpdateTransaction(id, transaction);
+            return new JsonResult(new { transaction }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
         }
         
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public IActionResult Delete(string id)
         {
             TransactionService.DeleteTransaction(id);
+            return new NoContentResult();
         }
 
         [HttpGet("export")]
