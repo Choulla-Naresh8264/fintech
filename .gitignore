@@ -198,3 +198,4 @@ FakesAssemblies/
 *.opt
 *.exe
 
+/src/labix.org/v2/mgo

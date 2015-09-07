@@ -23,13 +23,3 @@ func (r Row) From() string {
 func (r Row) To() string {
 	return r.Fields[4]
 }
-
-func (r Row) SetField(val string, offset int) {
-	for {
-		if len(r.Fields) > offset {
-			break
-		}
-		r.Fields = append(r.Fields, "")
-	}
-	r.Fields[offset] = val
-}
