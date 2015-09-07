@@ -9,18 +9,28 @@ using System.Threading.Tasks;
 
 namespace FinTech.Core.Services
 {
-    public class BtcService : IBtcService
+    public class BtcService: IBtcService
     {
+        private ICoinService CoinService { get; set; } 
         public IConfiguration Configuration { get; set; }
 
         public BtcService(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            var url = Configuration.GetSection("Settings:Bitcoin_DaemonUrl").Value;
+            var username = Configuration.GetSection("Settings:Bitcoin_RpcUsername").Value;
+            var password = Configuration.GetSection("Settings:Bitcoin_RpcPassword").Value;
+
+            CoinService = new BitcoinService(url, username, password);
+
         }
 
         public void GetInfo(string id)
         {
-            throw new NotImplementedException();
+            var networkDifficulty = CoinService.GetDifficulty();
+            var myBalance = CoinService.GetBalance();
+            var transaction = CoinService.GetTransaction(id);
         }
     }
 }
