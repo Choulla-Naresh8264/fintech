@@ -10,6 +10,6 @@ namespace FinTech.Core.Interfaces
 {
     public interface IBtcService
     {
-        void GetInfo(string id);
+        Transaction LookupTransactionInfo(string id);
     }
 }

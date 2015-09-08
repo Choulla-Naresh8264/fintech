@@ -6,8 +6,5 @@
         }
     },
   "Settings": {
-    "Bitcoin_DaemonUrl": "",
-    "Bitcoin_RpcUsername": "",
-    "Bitcoin_RpcPassword": ""
   }
 }

@@ -1,12 +1,25 @@
 {{#link-to "transactions"}}Back to Transaction list{{/link-to}}
-<form>
-
 <h2>Transaction details:</h2>
-<p><strong>Id: </strong><a href="https://blockchain.info/tx/{{model.id}}" target="_blank">{{model.id}}</a></p>
-<p><strong>Amount: </strong>{{model.amount}}</p>
-<p><strong>Timestamp: </strong>{{model.timestamp}}</p>
-<p><strong>From: </strong>{{model.fromAddress}}</p>
-<p><strong>To: </strong>{{model.toAddress}}</p>
 
-<!-- <button {{action 'saveTransaction'}} class="btn btn-default"><i class="fa fa-pencil"></i> Save changes</button> -->
-</form>
+{{#if model.isNew}}
+  <form class="form-inline">
+    <div class="form-group">
+      <div class="input-group">
+        {{input value=model.transactionId type="text" class="form-control" placeholder="Transaction Id"}}
+      </div>
+    </div>
+    <button {{action 'lookupTransaction' model}} class="btn btn-primary"><i class="fa fa-pencil"></i> Lookup</button>
+  </form>
+{{else}}
+  <p><strong>Transaction Id: </strong><a href="https://blockchain.info/tx/{{model.transactionId}}" target="_blank">{{model.transactionId}}</a></p>
+{{/if}}
+
+  <p><strong>Amount: </strong>{{model.amount}}</p>
+  <p><strong>Timestamp: </strong>{{model.timestamp}}</p>
+  <p><strong>From: </strong>{{model.fromAddress}}</p>
+  <p><strong>To: </strong>{{model.toAddress}}</p>
+
+{{#if canSave}}
+  <br/><br/>
+  <button {{action 'saveTransaction'}} class="btn btn-default"><i class="fa fa-pencil"></i> Save changes</button>
+{{/if}}

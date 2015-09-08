@@ -18,7 +18,7 @@ namespace FinTech.Core.Tests
         {
             var service = new BtcService(TestHelper.Configuration);
 
-            service.GetInfo("c7322fbe743b5d35951ca6abee71b8c8d2c3b8a606fce572f93a17ded3a4b60c");
+            service.LookupTransactionInfo("c7322fbe743b5d35951ca6abee71b8c8d2c3b8a606fce572f93a17ded3a4b60c");
         }
     }
 }

@@ -10,17 +10,15 @@ namespace FinTech.Core.Models
 {
     public class Transaction
     {
-        [BsonId]
+        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string Id { get; set; }
-        public string AccountId { get; set; }
+        public string TransactionId { get; set; }
         public DateTime Timestamp { get; set; }
         public double Amount { get; set; }
         public CryptoCurrencyType CurrencyType { get; set; } = CryptoCurrencyType.BitCoin;
         public string BlockChain { get; set; }
         public string FromAddress { get; set; }
         public string ToAddress { get; set; }
-
-
     }
 
     public enum CryptoCurrencyType

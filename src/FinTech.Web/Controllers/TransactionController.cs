@@ -9,6 +9,7 @@ using MongoDB.Bson;
 using FinTech.Web.Helpers;
 using System.Text;
 using System.IO;
+using FinTech.Web.ViewModels;
 
 namespace FinTech.Web.Controllers
 {
@@ -36,9 +37,11 @@ namespace FinTech.Web.Controllers
         }
         
         [HttpPost]
-        public void Create([FromBody]Transaction transaction)
+        public IActionResult Create([FromBody]TransactionVm vm)
         {
+            var transaction = vm.Transaction;
             TransactionService.CreateTransaction(transaction);
+            return new JsonResult(new { transaction }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
         }
         
         [HttpPut("{id}")]

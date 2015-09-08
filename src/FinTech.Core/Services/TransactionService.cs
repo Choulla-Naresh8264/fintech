@@ -83,8 +83,8 @@ namespace FinTech.Core.Services
         public double TotalAmount(string accountId, CryptoCurrencyType currencyType = CryptoCurrencyType.BitCoin)
         {
             var balance = TransactionCollection.Aggregate()
-                .Match(x => x.AccountId == accountId && currencyType == x.CurrencyType)
-                .Group(x => x.AccountId, y => new { Account = y.Key, Balance = y.Sum(z => z.Amount) })
+                .Match(x => x.TransactionId == accountId && currencyType == x.CurrencyType)
+                .Group(x => x.TransactionId, y => new { Account = y.Key, Balance = y.Sum(z => z.Amount) })
                 .FirstOrDefaultAsync().Result;
 
             if (balance == null) return 0;

@@ -7,6 +7,7 @@ using FinTech.Core.Models;
 using FinTech.Core.Interfaces;
 using MongoDB.Bson;
 using FinTech.Core.Services;
+using FinTech.Web.Helpers;
 
 namespace FinTech.Web.Controllers
 {
@@ -20,10 +21,10 @@ namespace FinTech.Web.Controllers
         }
         
         [HttpGet("{id}")]
-        public object Get(string id)
+        public IActionResult Get(string id)
         {
-            BtcService.GetInfo(id);
-            return new object { };
+            var transaction = BtcService.LookupTransactionInfo(id);
+            return new JsonResult(new { transaction }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
         }
         
     }

@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "FinTech.Core Class Library",
   "authors": [ "Marcin" ],
@@ -8,13 +8,13 @@
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "BitcoinLib": "1.3.3",
         "MongoDB.Driver": "2.0.1",
         "QifApi": "1.0.5668.31954"
       }
     }
   },
   "dependencies": {
+    "BlockchainAPI": "1.0.3",
     "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8-15530"
   }
 }

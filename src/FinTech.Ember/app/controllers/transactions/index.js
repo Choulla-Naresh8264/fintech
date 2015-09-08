@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
 
     if(this.get('content')===null){ return []; }
     return this.get('content').filter(function(el) {
-      return el!==null && el.get('id')!==null && el.get('id').match(rx);
+      return el!==null && el.get('transactionId')!==undefined && el.get('transactionId').match(rx);
     });
-  }.property('content', 'idFilter',"content.@each")
+  }.property('content', 'idFilter',"content.@each.transactionId")
 });
