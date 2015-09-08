@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"labix.org/v2/mgo"
+	"labix.org/v2/mgo/bson"
 	"strconv"
 	"time"
 )
@@ -43,7 +44,9 @@ func main() {
 	for i := range rows {
 		r := rows[i]
 		t := Transaction{}
-		t.Id = r.Id()
+		id := bson.NewObjectId()
+		t.Id = id.Hex()
+		t.TransactionId = r.TransactionId()
 		t.Timestamp, err = time.Parse(TimeFormat, r.Timestamp())
 		if err != nil {
 			fmt.Println("Error while parsting transaction timestamp: ", err)
@@ -55,7 +58,7 @@ func main() {
 		t.FromAddress = r.From()
 		t.ToAddress = r.To()
 
-		log.Println("Importing", t.Id)
+		log.Println("Importing", t.TransactionId)
 		err = transactions.Insert(&t)
 		if err != nil {
 			fmt.Println("Error while inserting transaction: ", err)

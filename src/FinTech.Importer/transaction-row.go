@@ -4,7 +4,7 @@ type Row struct {
 	Fields []string
 }
 
-func (r Row) Id() string {
+func (r Row) TransactionId() string {
 	return r.Fields[0]
 }
 
