@@ -17,7 +17,7 @@ namespace FinTech.Core.Interfaces
         Transaction AddTransaction(Transaction transaction);
         void ExportTransactions(string filename);
 
-        double TotalAmount(string accountId, CryptoCurrencyType currencyType = CryptoCurrencyType.BitCoin);
+        double TotalAmount();
         void CreateTransaction(Transaction transaction);
     }
 }

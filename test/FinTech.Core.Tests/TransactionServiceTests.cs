@@ -17,8 +17,8 @@ namespace FinTech.Core.Tests
         public void TotalAmountIsZeroForNew()
         {
             var service = new TransactionService(TestHelper.Configuration);
-            var amount = service.TotalAmount(null, Models.CryptoCurrencyType.BitCoin);
-            Assert.Equal(0, amount);
+            var amount = service.TotalAmount();
+            Assert.True(amount >= 0);
         }
     }
 }

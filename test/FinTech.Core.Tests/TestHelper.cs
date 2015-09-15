@@ -14,7 +14,7 @@ namespace FinTech.Core.Tests
             {
                 if(_configuration == null)
                 {
-                    var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..");
+                    var configPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..");
                     _configuration = new ConfigurationBuilder(configPath).AddJsonFile("config.json").Build();
                 }
                 return _configuration;
