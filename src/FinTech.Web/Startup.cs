@@ -33,12 +33,12 @@ namespace FinTech.Web
             {
                 options.OutputFormatters.Clear();
                 options.OutputFormatters.Add(JsonHelper.GetConfiguredOutputFormatter());
+                options.OutputFormatters.Add(new HttpNoContentOutputFormatter());
 
                 options.InputFormatters.Clear();
                 options.InputFormatters.Add(JsonHelper.GetConfiguredInputFormatter());                
             });
-
-            services.AddWebEncoders();
+            
             services.AddScoped<ITransactionService,TransactionService>();
             services.AddScoped<BtcService>();
             services.AddInstance(Configuration);

@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../src/FinTech.WcfWrapper/FinTech.WcfWrapper.csproj",
+      "bin": {
+        "assembly": "../../src/FinTech.WcfWrapper/obj/{configuration}/FinTech.WcfWrapper.dll",
+        "pdb": "../../src/FinTech.WcfWrapper/obj/{configuration}/FinTech.WcfWrapper.pdb"
+      }
+    }
+  }
+}

@@ -23,32 +23,32 @@ namespace FinTech.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public dynamic Get()
         {
             var transactions = TransactionService.GetTransactions();
-            return new JsonResult(new { transactions }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
+            return new { transactions };
         }
         
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public dynamic Get(string id)
         {
             var transaction = TransactionService.GetTransactionById(id);
-            return new JsonResult(new { transaction }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
+            return new { transaction };
         }
         
         [HttpPost]
-        public IActionResult Create([FromBody]TransactionVm vm)
+        public dynamic Create([FromBody]TransactionVm vm)
         {
             var transaction = vm.Transaction;
             TransactionService.CreateTransaction(transaction);
-            return new JsonResult(new { transaction }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
+            return new { transaction };
         }
         
         [HttpPut("{id}")]
-        public IActionResult Update(string id, [FromBody]Transaction transaction)
+        public dynamic Update(string id, [FromBody]Transaction transaction)
         {
             TransactionService.UpdateTransaction(id, transaction);
-            return new JsonResult(new { transaction }, JsonHelper.GetConfiguredOutputFormatter().SerializerSettings);
+            return new { transaction };
         }
         
         [HttpDelete("{id}")]
