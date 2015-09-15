@@ -4,5 +4,6 @@ COPY . /app
 WORKDIR /app
 RUN ["dnu", "restore"]
 
+WORKDIR /app/src/FinTech.Web
 EXPOSE 5000
-ENTRYPOINT ["dnx", "web"]
+ENTRYPOINT ["dnx", "kestrel"]

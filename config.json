@@ -1,7 +1,7 @@
 ﻿{
     "Data": {
         "DefaultConnection": {
-          "MongoConnectionString": "mongodb://localhost:27017",
+          "MongoConnectionString": "mongodb://172.17.42.1:27017",
           "MongoDatabase": "fintech"
         }
     },
